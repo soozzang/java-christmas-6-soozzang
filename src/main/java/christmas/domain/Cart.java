@@ -1,5 +1,6 @@
 package christmas.domain;
 
+import java.text.NumberFormat;
 import java.util.HashMap;
 
 public class Cart {
@@ -14,7 +15,25 @@ public class Cart {
         cart.put(menu,numberOfEach);
     }
 
-    public long calculatdTotalPrice() {
+    public HashMap<Menu, Integer> getCart() {
+        return cart;
+    }
 
+    public long calculatdTotalPrice() {
+        long totalPrice = 0;
+        for (Menu menu : cart.keySet()) {
+            totalPrice += menu.getPrice() * cart.get(menu);
+        }
+        return totalPrice;
+    }
+
+    public String calculatedTotalPriceForPrint() {
+        NumberFormat numberFormat = NumberFormat.getInstance();
+        numberFormat.setGroupingUsed(true);
+        return numberFormat.format(calculatdTotalPrice());
+    }
+
+    public int getCartSize() {
+        return cart.size();
     }
 }
