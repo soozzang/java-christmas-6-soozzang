@@ -7,10 +7,9 @@ import java.time.Month;
 public enum Day {
     WEEKDAY,WEEKEND;
 
-    public static Day daygenerator(int dateInput) {
-        int year = 2023;
-        Month month = Month.DECEMBER;
-        DayOfWeek dayOfWeek = LocalDate.of(dateInput,month,year).getDayOfWeek();
+    public static Day dayGenerator(int dateInput) {
+        LocalDate localdate = LocalDate.of(2023, Month.DECEMBER, dateInput);
+        DayOfWeek dayOfWeek = localdate.getDayOfWeek();
         if (dayOfWeek == DayOfWeek.FRIDAY || dayOfWeek == DayOfWeek.SATURDAY) {
             return WEEKEND;
         }
