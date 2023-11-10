@@ -3,7 +3,7 @@ package christmas.domain;
 public class Customer {
 
     private final long paidMoneyBeforeDiscount;
-    private final Badge badge;
+    private Badge badge;
 
     public Customer(long paidMoneyBeforeDiscount ) {
         this.paidMoneyBeforeDiscount = paidMoneyBeforeDiscount;
@@ -11,7 +11,15 @@ public class Customer {
     }
 
     public void setCustomerBadge(long totalBenefits) {
-        //
+        if (totalBenefits >= 5000L && totalBenefits < 10000L) {
+            badge = Badge.별;
+        }
+        if (totalBenefits >= 10000L && totalBenefits < 20000L) {
+            badge = Badge.트리;
+        }
+        if (totalBenefits >= 20000L) {
+            badge = Badge.산타;
+        }
     }
 
     public Badge getBadge() {
