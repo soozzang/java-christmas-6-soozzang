@@ -6,21 +6,21 @@ public class Restrictions {
     private final boolean isOnlyDrink;
     private final boolean isOverTwenty;
 
-    public Restrictions(Menu menu) {
-        this.isOverTenthousand = checkIsOverTenthousand(menu);
-        this.isOnlyDrink = checkIsOnlyDrink(menu);
-        this.isOverTwenty = checkIsOverTwenty(menu);
+    public Restrictions(Cart cart) {
+        this.isOverTenthousand = checkIsOverTenthousand(cart);
+        this.isOnlyDrink = checkIsOnlyDrink(cart);
+        this.isOverTwenty = checkIsOverTwenty(cart);
     }
 
-    public boolean checkIsOverTenthousand(Menu menu) {
+    public boolean checkIsOverTenthousand(Cart cart) {
         //
     }
 
-    public boolean checkIsOnlyDrink(Menu menu) {
+    public boolean checkIsOnlyDrink(Cart cart) {
         //
     }
 
-    public boolean checkIsOverTwenty(Menu menu) {
+    public boolean checkIsOverTwenty(Cart cart) {
         //
     }
 
