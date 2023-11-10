@@ -28,8 +28,26 @@ public enum Menu {
         this.korName = korName;
     }
 
+    public String getKorName() {
+        return korName;
+    }
+
+    public long getPrice() {
+        return price;
+    }
+
+    public String getType() {
+        return type;
+    }
+
     public static Menu getMenu(String korName) {
-        //
+        Menu[] menus = Menu.values();
+        for (Menu menu : menus) {
+            if (korName.equals(menu.korName)) {
+                return menu;
+            }
+        }
+        throw new IllegalArgumentException("[ERROR] 없는 메뉴입니다.");
     }
 
 }
