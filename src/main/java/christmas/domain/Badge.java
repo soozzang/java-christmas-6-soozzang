@@ -1,5 +1,5 @@
 package christmas.domain;
 
 public enum Badge {
-    STAR,TREE,SANTA
+    별,트리,산타
 }
