@@ -14,7 +14,7 @@ public class Cart {
         cart.put(menu,numberOfEach);
     }
 
-    public static long calculatdTotalPrice() {
+    public long calculatdTotalPrice() {
 
     }
 }
