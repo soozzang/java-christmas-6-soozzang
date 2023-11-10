@@ -13,4 +13,12 @@ public class Customer {
     public void setCustomerBadge(long totalBenefits) {
         //
     }
+
+    public Badge getBadge() {
+        return badge;
+    }
+
+    public long getPaidMoneyBeforeDiscount() {
+        return paidMoneyBeforeDiscount;
+    }
 }
