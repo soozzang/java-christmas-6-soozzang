@@ -1,17 +1,26 @@
 package christmas.service;
 
+
+import christmas.domain.Cart;
+import christmas.domain.Menu;
+
 public class BenefitsService {
 
-    // 크리스마스 디데이 할인 검증함수
-    public
+    public static long calculateDiscountInWeekday(Cart cart) {
+        for (Menu menu : cart.getCart().keySet()) {
+            if (menu.getType().equals("디저트")) {
+                return 2023L * (cart.getCart().get(menu));
+            }
+        }
+        return 0;
+    }
 
-    // 주말 / 평일 검증 함수
-    public
-
-    // 별 달린 날인지 검증 함수
-    public
-
-    // 샴페인 증정 가능한지 검증 함수
-    public
-
+    public static long calculateDiscountInWeekend(Cart cart) {
+        for (Menu menu : cart.getCart().keySet()) {
+            if (menu.getType().equals("메인")) {
+                return 2023L * (cart.getCart().get(menu));
+            }
+        }
+        return 0;
+    }
 }
