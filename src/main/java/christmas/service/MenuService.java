@@ -1,6 +1,7 @@
 package christmas.service;
 
 import christmas.domain.Menu;
+import christmas.view.InputView;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -25,18 +26,36 @@ public class MenuService {
         List<String> menuNameList = new ArrayList<>();
         for (String eachInput : menuInput) {
             int idxOfHyphen = eachInput.indexOf("-");
-            menuNameList.add(eachInput.substring(0,idxOfHyphen));
+            String menuName = eachInput.substring(0,idxOfHyphen);
+            InputView.validateIsNotInMenu(menuName);
+            menuNameList.add(menuName);
         }
+        InputView.validateDuplicateMenu(menuNameList);
         return menuNameList;
     }
 
     public static List<Integer> menuCountParser(List<String> menuInput) {
         List<Integer> menuCountList = new ArrayList<>();
         for (String eachInput : menuInput) {
-            int idxOfHyphen = eachInput.indexOf("-");
-            int eachMenuCount = Integer.parseInt(eachInput.substring(idxOfHyphen + 1));
+            int eachMenuCount = validateMenuCountIsInt(eachInput);
+            validateMenuCountIsOutOfRange(eachMenuCount);
             menuCountList.add(eachMenuCount);
         }
         return menuCountList;
+    }
+
+    public static int validateMenuCountIsInt(String eachInput) {
+        try {
+            int idxOfHyphen = eachInput.indexOf("-");
+            return Integer.parseInt(eachInput.substring(idxOfHyphen + 1));
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
+        }
+    }
+
+    public static void validateMenuCountIsOutOfRange(int eachMenuCount) {
+        if (eachMenuCount < 1) {
+            throw new IllegalArgumentException("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
+        }
     }
 }
