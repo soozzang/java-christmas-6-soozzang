@@ -7,26 +7,30 @@ public class Benefits {
     private final long starDisount;
     private final long champagne;
 
-    Benefits() {
-        this.christmasDdayDiscount = 0;
-        this.dayDiscount = 0;
-        this.starDisount = 0;
-        this.champagne = 0;
+    public Benefits(Date date, Cart cart) {
+        this.christmasDdayDiscount = calculateChristmasDdayDiscount(date);
+        this.dayDiscount = calculateDayDiscount(date);
+        this.starDisount = calculateStarDisount(date);
+        this.champagne = calculateChampagne(cart.calculatdTotalPrice());
     }
 
-    public void setChristmasDdayDiscount(Date date) {
+    private long calculateChristmasDdayDiscount(Date date) {
         // date 검증함수 후 christmasDdayDiscount 설정
     }
 
-    public void setDayDiscount(Date date) {
+    private long calculateDayDiscount(Date date) {
         // date 검증함수 후 dayDiscount 설정
     }
 
-    public void setStarDisount(Date date) {
+    private long calculateStarDisount(Date date) {
         // date 검증함수 후 starDiscount 설정
     }
 
-    public void setChampagne(Date date) {
+    private long calculateChampagne(long totalPrice) {
         // date 검증함수 후 Champagne 설정
+    }
+
+    public long calculateTotalBenefits() {
+        return
     }
 }
