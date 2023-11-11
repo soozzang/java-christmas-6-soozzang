@@ -1,9 +1,9 @@
 package christmas.view;
 
-import christmas.domain.Badge;
-import christmas.domain.Benefits;
-import christmas.domain.Cart;
-import christmas.domain.Menu;
+import christmas.domain.*;
+
+import static christmas.domain.Day.WEEKDAY;
+import static christmas.domain.Day.WEEKEND;
 
 public class OutputView {
 
@@ -17,34 +17,41 @@ public class OutputView {
 
     public static void printTotalPriceBefoeDiscount(Cart cart) {
         System.out.println("<할인 전 총주문 금액>");
-        System.out.println(cart.calculatedTotalPriceForPrint()+"원\n");
+        System.out.println(String.format("%,d", cart.calculatdTotalPrice())+"원\n");
     }
 
-    public static void printChampagne() {
+    public static void printChampagne(Benefits benefits) {
         System.out.println("<증정 메뉴>");
+        if (benefits.getChampagne() == 0) {
+            System.out.println("없음\n");
+            return;
+        }
         System.out.println("샴페인 1개");
         System.out.println(" ");
     }
 
     public static void printChristmasDiscount(long christmasDdayDiscount) {
         if (christmasDdayDiscount == 0) {
-            System.out.println("없음");
             return;
         }
         System.out.println("크리스마스 디데이 할인: "+"-"+String.format("%,d", christmasDdayDiscount)+"원");
     }
 
-    public static void printDdayDiscount(long ddayDiscount) {
-        if (ddayDiscount == 0) {
-            System.out.println("없음");
+    public static void printDayDiscount(long dayDiscount, Date date) {
+        if (dayDiscount == 0) {
             return;
         }
-        System.out.println("평일 할인: "+"-"+String.format("%,d", ddayDiscount)+"원");
+        if (date.getDay().equals(WEEKDAY)){
+            System.out.println("평일 할인: "+"-"+String.format("%,d", dayDiscount)+"원");
+            return;
+        }
+        if (date.getDay().equals(WEEKEND)) {
+            System.out.println("주말 할인: "+"-"+String.format("%,d", dayDiscount)+"원");
+        }
     }
 
     public static void printStarDiscount(long starDiscount) {
         if (starDiscount == 0) {
-            System.out.println("없음");
             return;
         }
         System.out.println("특별 할인: "+"-"+String.format("%,d", starDiscount)+"원");
@@ -52,16 +59,19 @@ public class OutputView {
 
     public static void printChampagneDiscount(long champagne) {
         if (champagne == 0) {
-            System.out.println("없음");
             return;
         }
         System.out.println("증정 이벤트: "+"-"+String.format("%,d", champagne)+"원");
     }
 
-    public static void printBenefitsList(Benefits benefits) {
+    public static void printBenefitsList(Benefits benefits, Date date) {
         System.out.println("<혜택 내역>");
+        if (benefits.calculateTotalBenefits() == 0) {
+            System.out.println("없음");
+            return;
+        }
         printChristmasDiscount(benefits.getChristmasDdayDiscount());
-        printDdayDiscount(benefits.getDayDiscount());
+        printDayDiscount(benefits.getDayDiscount(), date);
         printStarDiscount(benefits.getStarDisount());
         printChampagneDiscount(benefits.getChampagne());
         System.out.println(" ");
@@ -85,6 +95,10 @@ public class OutputView {
 
     public static void printBadge(Badge badge) {
         System.out.println("<12월 이벤트 배지>");
+        if (badge == null) {
+            System.out.println("없음");
+            return;
+        }
         System.out.println(badge);
     }
 
@@ -101,9 +115,9 @@ public class OutputView {
         printTotalPriceBefoeDiscount(cart);
     }
 
-    public static void printAfterChampagne(Benefits benefits, long predictedPrice, Badge badge) {
-        printChampagne();
-        printBenefitsList(benefits);
+    public static void printAfterChampagne(Benefits benefits, long predictedPrice, Badge badge, Date date) {
+        printChampagne(benefits);
+        printBenefitsList(benefits,date);
         printTotalBenefits(benefits.getTotalBenefits());
         printFinalPrice(predictedPrice);
         printBadge(badge);
