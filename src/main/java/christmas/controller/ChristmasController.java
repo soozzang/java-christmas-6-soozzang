@@ -35,7 +35,7 @@ public class ChristmasController {
         Benefits benefits = new Benefits(date,cart);
         customer.setCustomerBadge(benefits.calculateTotalBenefits());
         long predictedPrice = customer.getPaidMoneyBeforeDiscount() - benefits.calculateTotalDiscount();
-        OutputView.printAfterChampagne(benefits,predictedPrice,customer.getBadge());
+        OutputView.printAfterChampagne(benefits,predictedPrice,customer.getBadge(),date);
     }
 
     public void startIfIsUnableToGetBenefits(Customer customer) {
