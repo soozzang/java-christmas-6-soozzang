@@ -1,11 +1,9 @@
 package christmas.view;
 
 import camp.nextstep.edu.missionutils.Console;
-import christmas.domain.Menu;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashSet;
 import java.util.List;
 
 public class InputView {
@@ -43,7 +41,15 @@ public class InputView {
 
     public static List<String> readMenu() {
         System.out.println("주문하실 메뉴를 메뉴와 개수를 알려 주세요. (e.g. 해산물파스타-2,레드와인-1,초코케이크-1)");
-        return stringParser(Console.readLine());
+        while (true) {
+            try {
+                String menuInput = Console.readLine();
+                validateLastCharIsComma(menuInput);
+                return stringParser(menuInput);
+            } catch (IllegalArgumentException e) {
+                System.out.println(e.getMessage());
+            }
+        }
     }
 
     public static List<String> stringParser(String menuInput) {
@@ -51,15 +57,9 @@ public class InputView {
         return new ArrayList<>(Arrays.asList(parsedMenuStr));
     }
 
-    public static void validateCommaAfterComma(String menuInput) {
-
-    }
-
-    public static void validateIsContainBlank(String menuInput) {
-
-    }
-
     public static void validateLastCharIsComma(String menuInput) {
-
+        if (menuInput.charAt(menuInput.length() - 1) == ',') {
+            throw new IllegalArgumentException("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
+        }
     }
 }
