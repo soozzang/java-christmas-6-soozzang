@@ -17,15 +17,18 @@ public class CartService {
             try {
                 List<String> menuInput = InputView.readMenu();
                 HashMap<String, Integer> menuMap = makeMenuMap(menuInput);
-
-                for (String menuName : menuMap.keySet()) {
-                    Menu menu = Menu.getMenu(menuName);
-                    cart.addMenuInCart(menu, menuMap.get(menuName));
-                }
+                addCart(menuMap,cart);
                 return cart;
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
             }
+        }
+    }
+
+    public static void addCart(HashMap<String, Integer> menuMap, Cart cart) {
+        for (String menuName : menuMap.keySet()) {
+            Menu menu = Menu.getMenu(menuName);
+            cart.addMenuInCart(menu, menuMap.get(menuName));
         }
     }
 }
