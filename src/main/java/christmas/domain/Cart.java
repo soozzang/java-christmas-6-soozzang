@@ -27,12 +27,6 @@ public class Cart {
         return totalPrice;
     }
 
-    public String calculatedTotalPriceForPrint() {
-        NumberFormat numberFormat = NumberFormat.getInstance();
-        numberFormat.setGroupingUsed(true);
-        return numberFormat.format(calculatdTotalPrice());
-    }
-
     public int getCartSize() {
         return cart.size();
     }
