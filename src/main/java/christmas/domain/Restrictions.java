@@ -25,10 +25,7 @@ public class Restrictions {
     }
 
     public boolean checkIsOverTenthousand(Cart cart) {
-        if (cart.calculatdTotalPrice() >= 10000L) {
-            return true;
-        }
-        return false;
+        return cart.calculatdTotalPrice() >= 10000L;
     }
 
     public boolean checkIsNotOnlyDrink(Cart cart) {
