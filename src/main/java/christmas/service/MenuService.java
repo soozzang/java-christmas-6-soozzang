@@ -5,6 +5,7 @@ import christmas.view.InputView;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 
 public class MenuService {
@@ -25,12 +26,13 @@ public class MenuService {
     public static List<String> menuNameParser(List<String> menuInput) {
         List<String> menuNameList = new ArrayList<>();
         for (String eachInput : menuInput) {
+            validateMenuBetweenDash(eachInput);
             int idxOfHyphen = eachInput.indexOf("-");
             String menuName = eachInput.substring(0,idxOfHyphen);
-            InputView.validateIsNotInMenu(menuName);
+            validateIsNotInMenu(menuName);
             menuNameList.add(menuName);
         }
-        InputView.validateDuplicateMenu(menuNameList);
+        validateDuplicateMenu(menuNameList);
         return menuNameList;
     }
 
@@ -55,6 +57,32 @@ public class MenuService {
 
     public static void validateMenuCountIsOutOfRange(int eachMenuCount) {
         if (eachMenuCount < 1) {
+            throw new IllegalArgumentException("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
+        }
+    }
+
+    public static void validateMenuBetweenDash(String eachInput) {
+        if (!eachInput.contains("-")) {
+            throw new IllegalArgumentException("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
+        }
+    }
+
+    public static void validateDuplicateMenu(List<String> nameList) {
+        HashSet<String> menuSet = new HashSet<>(nameList);
+        if (menuSet.size() != nameList.size()) {
+            throw new IllegalArgumentException("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
+        }
+    }
+
+    public static void validateIsNotInMenu(String menuName) {
+        boolean flag = false;
+        for (Menu menu : Menu.values()) {
+            if (menu.getKorName().equals(menuName)) {
+                flag = true;
+                break;
+            }
+        }
+        if (!flag) {
             throw new IllegalArgumentException("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
         }
     }

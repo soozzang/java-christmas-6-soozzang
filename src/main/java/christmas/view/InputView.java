@@ -62,24 +62,4 @@ public class InputView {
     public static void validateLastCharIsComma(String menuInput) {
 
     }
-
-    public static void validateIsNotInMenu(String menuName) {
-        boolean flag = false;
-        for (Menu menu : Menu.values()) {
-            if (menu.getKorName().equals(menuName)) {
-                flag = true;
-                break;
-            }
-        }
-        if (!flag) {
-            throw new IllegalArgumentException("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
-        }
-    }
-
-    public static void validateDuplicateMenu(List<String> nameList) {
-        HashSet<String> menuSet = new HashSet<>(nameList);
-        if (menuSet.size() != nameList.size()) {
-            throw new IllegalArgumentException("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
-        }
-    }
 }
