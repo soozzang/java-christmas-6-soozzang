@@ -32,19 +32,16 @@ public class Benefits {
         return starDisount;
     }
 
-    private long calculateChristmasDdayDiscount(Date date) {
-        // date 검증함수 후 christmasDdayDiscount 설정
+    public long calculateChristmasDdayDiscount(Date date) {
         if (!date.getIsChristMasDayDiscount()) {
             return 0;
         }
-        // 계산로직
         long christmansDdayDiscount = 1000;
         christmansDdayDiscount += 100L*(date.getDate() - 1 );
         return christmansDdayDiscount;
     }
 
-    private long calculateDayDiscount(Date date, Cart cart) {
-        // date 검증함수 후 dayDiscount 설정
+    public long calculateDayDiscount(Date date, Cart cart) {
         long dayDiscount = 0;
         if (date.getDay() == Day.WEEKDAY) {
             dayDiscount += BenefitsService.calculateDiscountInWeekday(cart);
@@ -55,7 +52,7 @@ public class Benefits {
         return dayDiscount;
     }
 
-    private long calculateStarDisount(Date date, Cart cart) {
+    public long calculateStarDisount(Date date, Cart cart) {
         // date 검증함수 후 starDiscount 설정
         if (!date.getIsStarDate()) {
             return 0;
@@ -64,8 +61,7 @@ public class Benefits {
         return 1000L;
     }
 
-    private long calculateChampagne(long totalPrice) {
-        // date 검증함수 후 Champagne 설정
+    public long calculateChampagne(long totalPrice) {
         if (totalPrice >= 120000) {
             return 25000L;
         }
