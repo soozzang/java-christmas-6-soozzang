@@ -44,9 +44,6 @@ public class Date {
     private boolean checkIsStarDate(int date) {
         LocalDate localdate = LocalDate.of(2023, Month.DECEMBER, date);
         DayOfWeek getDay = localdate.getDayOfWeek();
-        if (getDay == DayOfWeek.SUNDAY || date == 25) {
-            return true;
-        }
-        return false;
+        return getDay == DayOfWeek.SUNDAY || date == 25;
     }
 }
