@@ -2,8 +2,6 @@ package christmas.domain;
 
 import christmas.service.BenefitsService;
 
-import java.text.NumberFormat;
-
 public class Benefits {
 
     private final long christmasDdayDiscount;
@@ -18,28 +16,20 @@ public class Benefits {
         this.champagne = calculateChampagne(cart.calculatdTotalPrice());
     }
 
-    public String getChampagneForPrint() {
-        NumberFormat numberFormat = NumberFormat.getInstance();
-        numberFormat.setGroupingUsed(true);
-        return numberFormat.format(champagne);
+    public long getChampagne() {
+        return champagne;
     }
 
-    public String getChristmasDdayDiscountForPrint() {
-        NumberFormat numberFormat = NumberFormat.getInstance();
-        numberFormat.setGroupingUsed(true);
-        return numberFormat.format(christmasDdayDiscount);
+    public long getChristmasDdayDiscount() {
+        return christmasDdayDiscount;
     }
 
-    public String getDayDiscountForPrint() {
-        NumberFormat numberFormat = NumberFormat.getInstance();
-        numberFormat.setGroupingUsed(true);
-        return numberFormat.format(dayDiscount);
+    public long getDayDiscount() {
+        return dayDiscount;
     }
 
-    public String getStarDisountForPrint() {
-        NumberFormat numberFormat = NumberFormat.getInstance();
-        numberFormat.setGroupingUsed(true);
-        return numberFormat.format(starDisount);
+    public long getStarDisount() {
+        return starDisount;
     }
 
     private long calculateChristmasDdayDiscount(Date date) {
@@ -95,9 +85,7 @@ public class Benefits {
         return calculateTotalBenefits() - champagne;
     }
 
-    public String totalBenefitsForPrint() {
-        NumberFormat numberFormat = NumberFormat.getInstance();
-        numberFormat.setGroupingUsed(true);
-        return numberFormat.format(calculateTotalBenefits());
+    public long getTotalBenefits() {
+        return calculateTotalBenefits();
     }
 }
